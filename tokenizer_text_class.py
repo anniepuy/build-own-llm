@@ -1,54 +1,26 @@
 """"
-Title: tokenizing_text.py
+Title: tokenizing_text_class.py
 Author: Ann Hagan
 Date: 2025-1-11
-Purpose: Tokenize a small text file using Python's standard library
+Purpose: Using the baseline tokenizer class and applying to a new text.
 """
-
-import urllib.request
+import re
 
 #Step 1: Import the text
-url = ("https://raw.githubusercontent.com/rasbt/"
-       "LLMs-from-scratch/main/ch02/01_main-chapter-code/"
-       "the-verdict.txt")
-file_path = "the-verdict.txt"
-urllib.request.urlretrieve(url, file_path)
-
-#load the text using Pythons standard file reading utiliites
-with open("the-verdict.txt", "r", encoding="utf-8") as f:
+# Open the file in read mode
+with open('wind_turbines.txt', 'r') as f:
+    # Read the entire file
     raw_text = f.read()
-print("Total number of characters: ", len(raw_text))
+
+# Print the content
 print(raw_text[:99])
+print("Total number of characters: ", len(raw_text))
 
 #Step 2: Split the text for better tokenization
-#Keep the puncuation marks with the words, and refrain from removing the capitialization beacsue LLMs need it. 
-import re
-text = raw_text[:99]
-result = re.split(r'(\s)', text)
-print(result)
-
-#Modify the split to remove whitespaces
-result = re.split(r'([,.] |\s)', text)
-print(f"Result with words and punctuation split: {result}")
-
-result = [item for item in result if item.strip()]
-print(f"Result with whitespaces removed: {result}")
-
-#Removing whitespaces reduces memory requirements but whitespaces are important fo tthe models to understand the exact structure of the text.
-
-
-#Improving it to handle multiple punctuation marks
-result2 = re.split(r'([,.:;?_!"()\']|--|\s)', text)
-result2 = [item.strip() for item in result2 if item.strip()]
-print(f"Improved results to handle multplie punctuation marks: {result2}")
-
-#Now apply the final split version to the entire raw_text
 preprocessed = re.split(r'([,.:;?_!"()\']|--|\s)', raw_text)
 preprocessed = [item.strip() for item in preprocessed if item.strip()]
 print(f"Total number of tokens: {len(preprocessed)}")
 print(f"First 30 tokens: {preprocessed[:30]}")
-
-#Next, we will convert the string tokens to integers. First we must build a vocabular to match each word to an integer.
 
 #Step 3: Build a vocabulary, removes dupliqates and assigns an integer to each unique word
 all_words = sorted(set(preprocessed))
@@ -62,7 +34,7 @@ for i, item in enumerate(vocab.items()):
     if i >= 50:
         break
 
-#Step 4: Apply this dictionary of token/words to the preprocessed text & also a decode method that takes the tokenIDs and transforms it back to text.
+
 class SimpleTokenizerV1:
     def __init__(self, vocab):
         self.str_to_int = vocab
@@ -86,8 +58,7 @@ class SimpleTokenizerV1:
             
 #Test the tokenizer
 tokenizer = SimpleTokenizerV1(vocab)
-text = """It's the last he painted, you know,"
-        Mrs. Gisburn said with pardonable pride."""
+text = raw_text
 ids = tokenizer.encode(text)
 print(f"Token IDs: {ids}")
 print(f"Decoded text: {tokenizer.decode(ids)}")

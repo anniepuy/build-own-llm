@@ -1,0 +1,18 @@
+Objectives and Constraints for Wind Turbine Optimization
+S. Andrew Ning, Rick Damiani, and Patrick J. Moriarty
+National Renewable Energy Laboratory, Golden, Colorado, 80401
+Efficient extraction of wind energy is a complex multidisciplinary process. This paper
+examines common objectives used in wind turbine optimization problems. The focus is
+not on the specific optimized designs, but rather on understanding when certain objec-
+tives and constraints are necessary, and what their limitations are. Maximizing annual
+energy production, or even using sequential aero/structural optimization, is shown to be
+significantly suboptimal compared to integrated aero/structural metrics. Minimizing the
+ratio of turbine mass to annual energy production can be e↵ective for fixed rotor diameter
+designs, as long as the tower mass is estimated carefully. For variable diameter designs, the
+predicted optimal diameter may be misleading. This is because the mass of the tower dom-
+inates the total turbine mass, but the cost of the tower is a much smaller fraction of overall
+turbine costs. Minimizing cost of energy is a much better metric, though high fidelity in
+the cost modeling is as important as high fidelity in the physics modeling. Furthermore,
+deterministic cost of energy minimization can be inadequate, given the stochastic nature of
+the wind and various uncertainties associated with physical processes and model choices.
+Optimization in the presence of uncertainty is necessary to create robust turbine designs.
