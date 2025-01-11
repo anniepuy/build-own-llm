@@ -1,3 +1,10 @@
+""""
+Title: tokenizing_text.py
+Author: Ann Hagan
+Date: 2025-1-11
+Purpose: Tokenize a small text file using Python's standard library
+"""
+
 import urllib.request
 
 #Step 1: Import the text
